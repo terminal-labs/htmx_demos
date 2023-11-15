@@ -1,0 +1,9 @@
+syntax: glob
+
+## patterns
+*.vagrant*
+*.pyc
+*.egg-info
+
+## paths
+venv

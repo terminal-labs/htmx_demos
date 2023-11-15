@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+    .center {
+      margin: auto;
+      width: 60%;
+      border: 3px solid #73AD21;
+      padding: 10px;
+    }
+    </style>
+	<script src="https://unpkg.com/htmx.org@1.9.8" integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+		var data_dict = {};
+		function myFunction(p1, p2) {
+		  data_dict["val"] = p1 * p2;
+		  return data_dict["val"]
+		}
+		function myVal() {
+		  return data_dict["val"]
+		}
+	</script>
+    </head>
+    <body>
+
+    <div class="center">
+      <button type="button" hx-get="/fragment" hx-target="#response_form" hx-swap="outerHTML" hx-vals='{"myVal": "op1"}'>opt 1</button>
+      <button type="button" hx-get="/fragment" hx-target="#response_form" hx-swap="outerHTML" hx-vals='{"myVal": "opt2"}'>opt 2</button>
+      <button type="button" hx-get="/fragment" hx-target="#response_form" hx-swap="outerHTML" hx-vals='{"myVal": "opt3"}'>opt 3</button>
+      <br><br>
+      <button type="button" hx-on:click="alert(myFunction(0,1))">opt 1</button>
+      <button type="button" hx-on:click="alert(myFunction(1,2))">opt 2</button>
+      <button type="button" hx-on:click="alert(myFunction(3,4))">opt 3</button>
+      <br><br>
+      <button type="button" hx-on:click="alert(myVal())">val</button>
+      <button type="button" hx-get="/fragment" hx-target="#response_form" hx-swap="outerHTML" hx-vals='js:{myVal: myVal()}'>send val</button>
+      <br><br>
+		<form action="/process" id="response_form">
+		  <label for="fname">First name:</label><br>
+		  <input type="text" id="fname" name="fname"><br>
+		  <label for="lname">Last name:</label><br>
+		  <input type="text" id="lname" name="lname">
+		  <input type="hidden" id="custId" name="custId" value="3487">
+		  <input type="submit" value="Submit">
+		</form>
+    </div>
+
+    </body>
+    </html>
